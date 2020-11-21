@@ -19,18 +19,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // レコード削除したい場合
+        // \DB::table('users')->delete();
+
         // 作成するレコード数
-        $count = 10;
+        $count = 900;
 
         for ($i = 0; $i < $count; $i++)
         {
             // ランダムな名前を生成する
             $first_name = self::FIRST_NAME_ARRAY[array_rand(self::FIRST_NAME_ARRAY)];
             $family_name = self::FAMILY_NAME_ARRAY[array_rand(self::FAMILY_NAME_ARRAY)];
+            $ramdom_number = mt_rand(0, 99999999);
 
             $param = [
                 'name' => "{$first_name} {$family_name}",
-                'email' => "{$first_name}{$family_name}@hogehoge.com",
+                'email' => "{$first_name}{$family_name}{$ramdom_number}@hogehoge.com",
                 'password' => 'password',
             ];
             \DB::table('users')->insert($param);
